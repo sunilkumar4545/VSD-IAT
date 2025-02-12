@@ -1,4 +1,4 @@
-# VSD-IAT
+
 # VSD-IAT WORKSHOP
 
 ## Course Content
