@@ -36,7 +36,8 @@
 ## Day 1: How to Talk to Computers
 
 During the physical designing process, you will encounter multiple terminologies. Some key terms are:
- ![d1_qfn_package](https://github.com/user-attachments/assets/64a1340c-542b-4870-af11-6a6ca4c9107f)
+ ![d1_qfn_package](https://github.com/user-attachments/assets/4215ccd9-0843-45f0-a8ee-87236c106b3b)
+
 - **Package**: A case that surrounds the circuit material to protect it from damage and allows for mounting electrical contacts connecting it to the PCB.
 - **Die**: A small block of semiconductor material where the circuit is fabricated.
 - **Core**: The actual area of the IC where logic resides.
@@ -49,7 +50,7 @@ During the physical designing process, you will encounter multiple terminologies
 - **Pads** = Connection points between the chip and the outside world.
 
 
-![m2](https://github.com/user-attachments/assets/cf1fb712-1809-4073-9d9a-4fe97b28f537)
+![m2](https://github.com/user-attachments/assets/e7babab3-aa9a-443f-bf8e-51d33aba24b0)
 
 ### How Applications Run on Hardware
 
@@ -69,7 +70,7 @@ For open-source ASIC design, the following components must be available as open-
 ### Historical Context
 In the early days, IC design and fabrication were controlled by companies like **Intel** and **Texas Instruments (TI)**. This changed in **1979**, when **Lynn Conway** and **Carver Mead** introduced the idea of separating **design** from **fabrication**.
 
-![m3](https://github.com/user-attachments/assets/a27c2a94-52aa-43d2-be71-4bfa2dab74e1)
+![m3](https://github.com/user-attachments/assets/0da45d98-ce04-4559-8426-d20a839e54dd)
 
 They proposed structured **λ-based design rules** and wrote the first VLSI book, *"Introduction to VLSI Systems"*. This led to two types of companies:
 
@@ -88,13 +89,13 @@ PDKs contain proprietary information and were traditionally shared under **NDAs 
 
 ### The Breakthrough: Open-Source PDK
 Google, in collaboration with **SkyWater Technology**, released the first-ever **open-source PDK** for SkyWater’s **130nm process** on **June 30, 2020**. This allowed hobbyists, researchers, and startups to design and fabricate custom chips without NDAs or high costs.
-![m4](https://github.com/user-attachments/assets/b6480666-85d3-4d62-b45f-f584477f385a)
 
+![m4](https://github.com/user-attachments/assets/c0769fcf-6845-4a89-844d-e68a2652a35e)
 
 ---
 
 ## RTL2GDS OpenLANE ASIC Flow
-![m5](https://github.com/user-attachments/assets/c9578d4d-578d-423c-abd7-bc8fbb6b125b)
+![m5](https://github.com/user-attachments/assets/ed9ff287-2a37-426b-b928-c2a3b99d2a0e)
 
 **OpenLANE** is an automated **RTL to GDSII** flow. It integrates several open-source tools:
 - **OpenROAD**
@@ -107,8 +108,10 @@ Google, in collaboration with **SkyWater Technology**, released the first-ever *
 - **SPEF-Extractor**
 - **CU-GR**
 - **KLayout**
+![EDA](https://github.com/user-attachments/assets/ff1296e3-1e50-49a1-83d7-38d24f355c3c)
+
 - Custom methodology scripts for design exploration and optimization.
-![m6](https://github.com/user-attachments/assets/e49ccb45-8802-44fb-84ff-60984b66acac)
+![m6](https://github.com/user-attachments/assets/9e4e6a26-0eff-4e77-882b-2d148867ceb5)
 
 ## Section 1: Lab Work - Task 1
 
@@ -130,6 +133,8 @@ The priority order for OpenLANE settings is:
 3️⃣ Default values in `OpenLANE/configuration/`
 
 ---
+![RUN](https://github.com/user-attachments/assets/d1d838fd-3b07-4998-b16e-e714b70aceb3)
+
 
 ###  **Steps to Run OpenLANE Flow**
 To execute the OpenLANE flow for `picorv32a`, follow these steps:
@@ -171,10 +176,13 @@ Exit
 
 ### 📊 **Generated Outputs**
 Once synthesis is complete, the following outputs will be generated:
-![oplean ivoke](https://github.com/user-attachments/assets/ddfa15e6-6f66-4527-9d35-0bbe03ff62d8)
-![after](https://github.com/user-attachments/assets/83892b10-8cbc-47e9-ad59-ec5aa3963285)
-![cells](https://github.com/user-attachments/assets/75fb7fd0-ec27-4623-ad07-447e3c369adb)
-![cell2](https://github.com/user-attachments/assets/bb26c112-ebd4-43a6-8286-b0d8a7a28110)
+
+![oplean ivoke](https://github.com/user-attachments/assets/8ac345de-cbd8-4589-bce7-a5701a0375f3)
+![after](https://github.com/user-attachments/assets/caf1d548-d4b8-4ef6-a3db-101c588f1c20)
+![cells](https://github.com/user-attachments/assets/9c868fd6-7a3f-4bba-947a-145256a87e33)
+![cell2](https://github.com/user-attachments/assets/6868857a-62d8-461f-8601-66b1d3c0ec45)
+
+
 
 ✅ **Reports on cell usage and flip-flop count**
 ### 🔢 **Flip-Flop Ratio Calculation**
@@ -183,7 +191,7 @@ The flip-flop ratio is the ratio of the number of flip-flops to the total number
 For the `picorv32a` design:
 - **Number of Flip-Flops** = 1613
 - **Total Number of Cells** = 14876
-  ![cs](https://github.com/user-attachments/assets/36659b11-d43b-4b36-af4f-4dd2dd6fd253)
+![cs](https://github.com/user-attachments/assets/f2b3a08b-17e8-485b-b8a9-f780cf38deb2)
 
 
 
