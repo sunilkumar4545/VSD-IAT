@@ -223,3 +223,102 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ### Placement Results
 ![fp 5](https://github.com/user-attachments/assets/136a351f-27d8-4cdb-812a-b31518b264f3)
 ![fp 5 5](https://github.com/user-attachments/assets/e05e4b74-c9fb-4420-ac43-aa558a4fc532)
+
+
+
+---
+
+## Day 3: Design a Library Cell using Magic Layout and Ngspice Characterization
+
+
+
+1. Clone custom inverter standard cell design from github repository
+ ```bash  
+# Change directory to openlane
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# Clone the repository with custom inverter design
+git clone https://github.com/nickson-jose/vsdstdcelldesign
+
+# Change into repository directory
+cd vsdstdcelldesign
+
+# Copy magic tech file to the repo directory for easy access
+cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech .
+
+# Check contents whether everything is present
+ls
+
+# Command to open custom inverter layout in magic
+magic -T sky130A.tech sky130_inv.mag &
+```
+Screenshot of commands run
+
+![day 3](https://github.com/user-attachments/assets/a7bb6c7a-6c1d-49b4-9703-ed35ea9d2416)
+
+![day 33](https://github.com/user-attachments/assets/5c5cbc3e-2214-44a0-9af7-daf266b786bf)
+
+![day 333](https://github.com/user-attachments/assets/1819f28b-f12e-4456-b36f-0d8e33dc38cf)
+
+![day 3333](https://github.com/user-attachments/assets/421f0a6d-e49e-46ed-9b93-ef7893deb17b)
+
+Screenshot of tkcon window after running above commands
+![day 33333](https://github.com/user-attachments/assets/b29cf8ba-58f8-4d02-817d-b886640d8535)
+Spice extraction of inverter in magic.
+Commands for spice extraction of the custom inverter layout to be used in tkcon window of magic
+```bash
+# Check current directory
+pwd
+
+# Extraction command to extract to .ext format
+extract all
+
+# Before converting ext to spice this command enable the parasitic extraction also
+ext2spice cthresh 0 rthresh 0
+
+# Converting to ext to spice
+ext2spice
+```
+Final edited spice file ready for ngspice simulation
+```bash
+* SPICE3 file created from sky130_inv2.ext - technology: sky130A  
+.option scale=0.01u  
+.include ./libs/pshort.lib  
+.include ./libs/nshort.lib  
+
+M1000 Y A VPWR VPWR pshort_model.0 w=37 l=23  
++ ad=1443 pd=152 as=1517 ps=156  
+M1001 Y A VGND VGND nshort_model.0 w=35 l=23  
++ ad=1435 pd=152 as=1365 ps=148  
+
+VDD VPWR 0 3.3V  
+VSS VGND 0 0V  
+Va A VGND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns)  
+
+C0 A Y 0.05fF  
+C1 Y VPWR 0.11fF  
+C2 A VPWR 0.07fF  
+C3 Y 0 2fF  
+C4 VPWR 0 0.59fF  
+
+.tran 1n 20n  
+
+.control  
+run  
+.endc  
+.end  
+```
+Post-layout ngspice simulations.
+Commands for ngspice simulation
+```bash
+# Command to directly load spice file for simulation to ngspice
+ngspice sky130_inv.spice
+
+# Now that we have entered ngspice with the simulation spice file loaded we just have to load the plot
+plot y vs time a
+```
+![4](https://github.com/user-attachments/assets/3cadb05a-1f3a-4565-98fa-38b48831bb47)
+Screenshot of generated plot
+![4-1](https://github.com/user-attachments/assets/2ef2170f-393a-4622-93e9-802a7487afbc)
+
+
