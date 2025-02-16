@@ -1,5 +1,9 @@
-
 # VSD-IAT WORKSHOP
+
+## Table of Contents
+- [Course Content](#course-content)
+- [Day 1: How to Talk to Computers](#day-1-how-to-talk-to-computers)
+- [Day 2: Good Floorplan vs Bad Floorplan](#day-2-good-floorplan-vs-bad-floorplan)
 
 ## Course Content
 
@@ -35,164 +39,184 @@
 
 ## Day 1: How to Talk to Computers
 
-During the physical designing process, you will encounter multiple terminologies. Some key terms are:
- ![d1_qfn_package](https://github.com/user-attachments/assets/4215ccd9-0843-45f0-a8ee-87236c106b3b)
+### IC Design Terminology
+![d1_qfn_package](https://github.com/user-attachments/assets/4215ccd9-0843-45f0-a8ee-87236c106b3b)
 
+#### Key Components:
 - **Package**: A case that surrounds the circuit material to protect it from damage and allows for mounting electrical contacts connecting it to the PCB.
 - **Die**: A small block of semiconductor material where the circuit is fabricated.
 - **Core**: The actual area of the IC where logic resides.
 - **Pads**: Interfaces between the internal signals of a chip and external pins, connected via wire bonds.
 
-### Simple Definitions:
-- **Package** = Protective case with pins.
-- **Die** = Tiny brain of the chip.
-- **Core** = The part where the processing happens.
-- **Pads** = Connection points between the chip and the outside world.
-
+#### Simple Definitions:
+- **Package** = Protective case with pins
+- **Die** = Tiny brain of the chip
+- **Core** = The part where the processing happens
+- **Pads** = Connection points between the chip and the outside world
 
 ![m2](https://github.com/user-attachments/assets/e7babab3-aa9a-443f-bf8e-51d33aba24b0)
 
-### How Applications Run on Hardware
+### Application to Hardware Flow
+1. **Operating System (OS)**
+   - Manages hardware
+   - Provides functions in C, C++, Java, etc.
+2. **Compiler**
+   - Converts OS functions into hardware-specific instructions
+3. **Assembler**
+   - Translates instructions into binary (machine language)
 
-1. **Operating System (OS)**: Manages hardware and provides functions in C, C++, Java, etc.
-2. **Compiler**: Converts OS functions into hardware-specific instructions (e.g., Intel, ARM).
-3. **Assembler**: Translates instructions into binary (machine language - 0s and 1s).
+### Open-Source ASIC Design Implementation
 
----
+#### Required Components:
+- **RTL Designs**: Register-Transfer Level circuit descriptions
+- **EDA Tools**: Electronic Design Automation tools
+- **PDK Data**: Process Design Kits
 
-## Open-Source ASIC Design Implementation
-
-For open-source ASIC design, the following components must be available as open-source:
-- **RTL Designs**: Register-Transfer Level (RTL) circuit descriptions.
-- **EDA Tools**: Electronic Design Automation tools for design, simulation, and verification.
-- **PDK Data**: Process Design Kits for chip fabrication.
-
-### Historical Context
-In the early days, IC design and fabrication were controlled by companies like **Intel** and **Texas Instruments (TI)**. This changed in **1979**, when **Lynn Conway** and **Carver Mead** introduced the idea of separating **design** from **fabrication**.
+#### Historical Context
+- **1979**: Lynn Conway and Carver Mead separated design from fabrication
+- Introduced λ-based design rules
+- Wrote "Introduction to VLSI Systems"
 
 ![m3](https://github.com/user-attachments/assets/0da45d98-ce04-4559-8426-d20a839e54dd)
 
-They proposed structured **λ-based design rules** and wrote the first VLSI book, *"Introduction to VLSI Systems"*. This led to two types of companies:
+#### Industry Evolution:
+- **Fabless Companies**: Design-focused
+- **Pure Play Fabs**: Manufacturing-focused
 
-- **Fabless Companies**: Focus only on designing chips.
-- **Pure Play Fabs**: Focus only on manufacturing chips.
-
-The interface between designers and fabs is a set of files and documents called **Process Design Kits (PDKs)**, which include:
+#### PDK Components:
 - Device models
 - Technology information
 - Design rules
 - Digital standard cell libraries
 - I/O libraries
 
-### The Challenge with PDKs
-PDKs contain proprietary information and were traditionally shared under **NDAs (Non-Disclosure Agreements)**, limiting open innovation.
-
-### The Breakthrough: Open-Source PDK
-Google, in collaboration with **SkyWater Technology**, released the first-ever **open-source PDK** for SkyWater’s **130nm process** on **June 30, 2020**. This allowed hobbyists, researchers, and startups to design and fabricate custom chips without NDAs or high costs.
-
-![m4](https://github.com/user-attachments/assets/c0769fcf-6845-4a89-844d-e68a2652a35e)
-
----
-
-## RTL2GDS OpenLANE ASIC Flow
+### RTL2GDS OpenLANE ASIC Flow
 ![m5](https://github.com/user-attachments/assets/ed9ff287-2a37-426b-b928-c2a3b99d2a0e)
 
-**OpenLANE** is an automated **RTL to GDSII** flow. It integrates several open-source tools:
-- **OpenROAD**
-- **Yosys**
-- **Magic**
-- **Netgen**
-- **Fault**
-- **OpenPhySyn**
-- **CVC**
-- **SPEF-Extractor**
-- **CU-GR**
-- **KLayout**
+#### Integrated Tools:
+- OpenROAD
+- Yosys
+- Magic
+- Netgen
+- Fault
+- OpenPhySyn
+- CVC
+- SPEF-Extractor
+- CU-GR
+- KLayout
+
 ![EDA](https://github.com/user-attachments/assets/ff1296e3-1e50-49a1-83d7-38d24f355c3c)
 
-- Custom methodology scripts for design exploration and optimization.
-![m6](https://github.com/user-attachments/assets/9e4e6a26-0eff-4e77-882b-2d148867ceb5)
+### Lab Work - Task 1: Running 'picorv32a' Design
 
-## Section 1: Lab Work - Task 1
+#### OpenLANE Configuration Priority:
+1. sky130_xxxxx_config.tcl
+2. config.tcl
+3. Default values
 
-### Running 'picorv32a' Design Synthesis using OpenLANE Flow
-
-The OpenLANE flow is an automated RTL-to-GDSII toolchain used for ASIC design. In this lab, we will run synthesis on the `picorv32a` design using OpenLANE and generate the necessary outputs.
-
----
-
-### 🔹 **Understanding OpenLANE Configuration**
-Each design in OpenLANE has specific configuration settings stored in the `config.tcl` file. These configurations define parameters like:
-- 🕒 **Clock period**
-- 🔌 **Clock port**
-- 📜 **Verilog files**
-
-The priority order for OpenLANE settings is:
-1️⃣ `sky130_xxxxx_config.tcl` in `OpenLANE/designs/[design]/`
-2️⃣ `config.tcl` in `OpenLANE/designs/[design]/`
-3️⃣ Default values in `OpenLANE/configuration/`
-
----
 ![RUN](https://github.com/user-attachments/assets/d1d838fd-3b07-4998-b16e-e714b70aceb3)
 
+#### Step-by-Step Execution:
 
-###  **Steps to Run OpenLANE Flow**
-To execute the OpenLANE flow for `picorv32a`, follow these steps:
-
-📌 **Step 1:** Navigate to the OpenLANE directory
-```bbox
+1. **Navigate to OpenLANE directory**
+```bash
 cd openLANE
 ```
-📌 **Step 2:** Start OpenLANE Docker environment
-```bbox
+
+2. **Start Docker environment**
+```bash
 docker
 ```
-📌 **Step 3:** Start OpenLANE interactive mode
-```bbox
-bash-4.2$ ./flow.tcl -interactive
-```
-📌 **Step 4:** Load OpenLANE package
-```bbox
-% package require openlane 0.9
-```
-📌 **Step 5:** Prepare the design
-```bbox
-% prep -design picorv32a
-```
-📌 **Step 6:** Run synthesis
-```bbox
-% run_synthesis
-```
-📌 **Step 7:** Exit OpenLANE
-```bbox
-exit
-```
-📌 **Step 8:** Exit Docker
-```bbox
-Exit
+
+3. **Start OpenLANE interactive mode**
+```bash
+./flow.tcl -interactive
 ```
 
----
+4. **Load OpenLANE package**
+```bash
+package require openlane 0.9
+```
 
-### 📊 **Generated Outputs**
-Once synthesis is complete, the following outputs will be generated:
+5. **Prepare design**
+```bash
+prep -design picorv32a
+```
 
+6. **Run synthesis**
+```bash
+run_synthesis
+```
+
+#### Generated Outputs:
 ![oplean ivoke](https://github.com/user-attachments/assets/8ac345de-cbd8-4589-bce7-a5701a0375f3)
 ![after](https://github.com/user-attachments/assets/caf1d548-d4b8-4ef6-a3db-101c588f1c20)
 ![cells](https://github.com/user-attachments/assets/9c868fd6-7a3f-4bba-947a-145256a87e33)
 ![cell2](https://github.com/user-attachments/assets/6868857a-62d8-461f-8601-66b1d3c0ec45)
 
+#### Flip-Flop Ratio Calculation:
+- **Number of Flip-Flops**: 1613
+- **Total Number of Cells**: 14876
 
-
-✅ **Reports on cell usage and flip-flop count**
-### 🔢 **Flip-Flop Ratio Calculation**
-The flip-flop ratio is the ratio of the number of flip-flops to the total number of cells in the design. It is calculated using the following formula:
-#### **Example Calculation:**
-For the `picorv32a` design:
-- **Number of Flip-Flops** = 1613
-- **Total Number of Cells** = 14876
 ![cs](https://github.com/user-attachments/assets/f2b3a08b-17e8-485b-b8a9-f780cf38deb2)
 
+---
 
+## Day 2: Good Floorplan vs Bad Floorplan
 
+### Introduction to Floorplanning
+![day2](https://github.com/user-attachments/assets/13184123-e431-40f9-85ba-92bc1f414b14)
+![day2 2](https://github.com/user-attachments/assets/45988e7f-4dba-48dd-a728-49ae54c7cc14)
 
+### Key Concepts:
+
+#### Aspect Ratio
+- Ratio of height to width of core area
+- Aspect ratio of 1 indicates square shape
+
+#### Utilization Factor
+- Ratio of netlist area to core area
+- Recommended range: 0.5 to 0.7
+
+#### Preplaced Cells
+- Fixed location cells
+- Examples: memory blocks, clock gating cells, comparators
+
+#### Decoupling Capacitors
+- Used with preplaced cells
+- Compensates voltage drop
+- Charges to supply voltage
+
+#### Power Planning
+- Provides power to all components
+- Creates power grid network
+- Mitigates voltage droop
+
+### Implementation Steps
+
+1. **Run Floorplan**
+```bash
+run_floorplan
+```
+
+![lab 2 fp 1](https://github.com/user-attachments/assets/3c80b5f4-7821-4533-98c7-8a009a223080)
+![fp 2](https://github.com/user-attachments/assets/27a84638-4326-4fb6-a6a0-5ae659dadbe2)
+![fp 3](https://github.com/user-attachments/assets/2243289c-cd58-4e24-b5c0-0596d6c8bea2)
+
+2. **Run Placement**
+```bash
+run_placement
+```
+
+![fp 4](https://github.com/user-attachments/assets/f3d7d08f-8d7f-4fe1-b24c-c875a0df5bda)
+
+3. **Load Placement in Magic**
+```bash
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/24-03_10-03/results/placement/
+
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
+
+### Placement Results
+![fp 5](https://github.com/user-attachments/assets/136a351f-27d8-4cdb-812a-b31518b264f3)
+![fp 5 5](https://github.com/user-attachments/assets/e05e4b74-c9fb-4420-ac43-aa558a4fc532)
