@@ -198,7 +198,10 @@ run_synthesis
 ```bash
 run_floorplan
 ```
-
+**Load Floorplan in Magic**
+```bash
+magic -T $PDK/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
 ![lab 2 fp 1](https://github.com/user-attachments/assets/3c80b5f4-7821-4533-98c7-8a009a223080)
 ![fp 2](https://github.com/user-attachments/assets/27a84638-4326-4fb6-a6a0-5ae659dadbe2)
 ![fp 3](https://github.com/user-attachments/assets/2243289c-cd58-4e24-b5c0-0596d6c8bea2)
@@ -207,9 +210,7 @@ run_floorplan
 ```bash
 run_placement
 ```
-```bash
-magic -T $PDK/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
-```
+
 ![fp 4](https://github.com/user-attachments/assets/f3d7d08f-8d7f-4fe1-b24c-c875a0df5bda)
 
 3. **Load Placement in Magic**
