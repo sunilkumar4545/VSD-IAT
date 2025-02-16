@@ -207,12 +207,14 @@ run_floorplan
 ```bash
 run_placement
 ```
-
+```bash
+magic -T $PDK/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
 ![fp 4](https://github.com/user-attachments/assets/f3d7d08f-8d7f-4fe1-b24c-c875a0df5bda)
 
 3. **Load Placement in Magic**
 ```bash
-cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/24-03_10-03/results/placement/
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/16-02_07-35/results/placement/
 
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
 ```
